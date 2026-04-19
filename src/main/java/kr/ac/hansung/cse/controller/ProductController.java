@@ -42,7 +42,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-
     // ─────────────────────────────────────────────────────────────────
     // GET /products - 상품 목록 조회
     // ─────────────────────────────────────────────────────────────────

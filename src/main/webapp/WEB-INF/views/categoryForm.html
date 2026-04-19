@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카테고리 등록 - Product Management</title>
+    <style>
+        body { font-family: 'Malgun Gothic', Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; color: #333; }
+        h1 { border-bottom: 2px solid #4a90d9; padding-bottom: 10px; color: #2c3e50; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-weight: bold; margin-bottom: 6px; }
+        input[type="text"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 1em; box-sizing: border-box; }
+        input[type="text"]:focus { outline: none; border-color: #4a90d9; box-shadow: 0 0 3px rgba(74,144,217,0.4); }
+        .field-error { color: #e74c3c; font-size: 0.9em; margin-top: 5px; display: block; }
+        .btn { display: inline-block; padding: 10px 22px; background: #4a90d9; color: white; text-decoration: none; border: none; border-radius: 4px; font-size: 1em; cursor: pointer; margin-right: 6px; }
+        .btn:hover { background: #357abd; }
+        .btn-cancel { background: #7f8c8d; }
+        .btn-cancel:hover { background: #566566; }
+    </style>
+</head>
+<body>
+
+<h1>새 카테고리 등록</h1>
+
+<!-- th:object로 categoryForm과 바인딩 -->
+<form th:action="@{/categories/create}" th:object="${categoryForm}" method="post">
+
+    <div class="form-group">
+        <label for="name">카테고리 이름</label>
+
+        <!-- th:field가 name, id, value 자동 설정 -->
+        <input type="text" th:field="*{name}" placeholder="예: 전자제품, 도서, 스포츠"/>
+
+        <!-- @NotBlank, @Size, DuplicateCategoryException 오류 메시지 표시 -->
+        <span class="field-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+
+    <button type="submit" class="btn">등록</button>
+    <a class="btn btn-cancel" th:href="@{/categories}">취소</a>
+</form>
+
+<!-- 모든 페이지 하단: 날짜/시간/학번/성명 표시 -->
+<footer style="margin-top: 40px; padding: 15px; border-top: 2px solid #333; background-color: #f5f5f5; text-align: center; font-size: 14px;">
+    <p th:text="${'실습 수행 일시: ' + #temporals.format(#temporals.createNow(), 'yyyy년 MM월 dd일 (E) a hh시 mm분 ss초') + ' │ 학번: 2271507 │ 성명: 김수진'}"></p>
+</footer>
+
+</body>
+</html>
