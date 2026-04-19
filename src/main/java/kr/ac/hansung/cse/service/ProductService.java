@@ -133,4 +133,20 @@ public class ProductService {
     public void deleteProduct(Long id) {
         productRepository.delete(id);
     }
+
+    /**
+     * 상품명 키워드 검색 (JPQL LIKE)
+     * readOnly=true 상속: 검색은 읽기 전용으로 충분
+     */
+    public List<Product> searchByName(String keyword) {
+        return productRepository.findByNameContaining(keyword);
+    }
+
+    /**
+     * 카테고리 ID로 상품 필터
+     */
+    public List<Product> searchByCategory(Long categoryId) {
+        return productRepository.findByCategoryId(categoryId);
+    }
+
 }
